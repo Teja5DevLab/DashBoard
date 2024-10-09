@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme.js";
 import { mockDataTeam } from "../../Data/Data";
@@ -10,8 +10,10 @@ import Header from "../../Components/Header";
 const Team = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMediumScreen = useMediaQuery(theme.breakpoints.between("sm", "md"));
   const columns = [
-    { field: "id", headerName: "ID" },
+    !isSmallScreen && { field: "id", headerName: "ID", flex: 0.5 },
     {
       field: "name",
       headerName: "Name",
@@ -24,25 +26,27 @@ const Team = () => {
       type: "number",
       headerAlign: "left",
       align: "left",
+      flex: 0.7,
     },
-    {
-      field: "phone",
-      headerName: "Phone Number",
-      flex: 1,
-    },
-    {
-      field: "email",
-      headerName: "Email",
-      flex: 1,
-    },
-    {
+    !isSmallScreen &&
+      !isMediumScreen && {
+        field: "phone",
+        headerName: "Phone Number",
+        flex: 1,
+      },
+    !isSmallScreen &&
+      !isMediumScreen && {
+        field: "email",
+        headerName: "Email",
+        flex: 1,
+      },
+    !isSmallScreen && {
       field: "accessLevel",
       headerName: "Access Level",
       flex: 1,
       renderCell: ({ row: { access } }) => {
         return (
           <Box
-            className="cursor-grab"
             width="60%"
             m="10px auto"
             p="5px"
@@ -67,10 +71,10 @@ const Team = () => {
         );
       },
     },
-  ];
+  ].filter(Boolean);
 
   return (
-    <Box m="20px">
+    <Box m={isSmallScreen? "20px 0 0 20px" : "20px 20px 0 20px"}>
       <Header title="TEAM" subtitle="Managing the Team Members" />
       <Box
         m="15px 0 0 0"

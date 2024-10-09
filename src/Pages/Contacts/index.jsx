@@ -1,4 +1,4 @@
-import { Box, useTheme } from "@mui/material";
+import { Box, useTheme, useMediaQuery } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme.js";
 import { mockDataContacts } from "../../Data/Data";
@@ -7,8 +7,10 @@ import Header from "../../Components/Header";
 const Contacts = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMediumScreen = useMediaQuery(theme.breakpoints.between("sm", "md"));
   const columns = [
-    { field: "id", headerName: "ID", flex: 0.5 },
+    !isSmallScreen && { field: "id", headerName: "ID", flex: 0.5 },
     {
       field: "name",
       headerName: "Name",
@@ -20,25 +22,27 @@ const Contacts = () => {
       headerName: "Email",
       flex: 1,
     },
-    {
+    !isSmallScreen && {
       field: "address",
       headerName: "Address",
       flex: 1,
     },
-    {
-      field: "city",
-      headerName: "City",
-      flex: 1,
-    },
-    {
-      field: "zipCode",
-      headerName: "Zip Code",
-      flex: 1,
-    },
-  ];
+    !isSmallScreen &&
+      !isMediumScreen && {
+        field: "city",
+        headerName: "City",
+        flex: 1,
+      },
+    !isSmallScreen &&
+      !isMediumScreen && {
+        field: "zipCode",
+        headerName: "Zip Code",
+        flex: 1,
+      },
+  ].filter(Boolean);
 
   return (
-    <Box m="20px">
+    <Box m={isSmallScreen? "20px 0 0 20px" : "20px 20px 0 20px"}>
       <Header title="CONTACT" subtitle="Contacts for Future Reference" />
       <Box
         m="15px 0 0 0"

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, IconButton, Typography, useTheme, useMediaQuery } from "@mui/material";
 import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../theme";
@@ -39,10 +39,20 @@ const Sidebar = ({ onCollapse }) => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+  const isMobile = useMediaQuery("(max-width:600px)");
+
+  useEffect(() => {
+    if (isMobile) {
+      setIsCollapsed(true);
+      onCollapse(true);
+    }
+  }, [isMobile, onCollapse]);
 
   const handleCollapse = () => {
-    setIsCollapsed(!isCollapsed);
-    onCollapse(!isCollapsed);
+    if (!isMobile) {
+      setIsCollapsed(!isCollapsed);
+      onCollapse(!isCollapsed);
+    }
   };
 
   return (

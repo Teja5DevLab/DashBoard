@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme.js";
 import { mockDataInvoices } from "../../Data/Data";
@@ -7,24 +7,28 @@ import Header from "../../Components/Header";
 const Invoices = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMediumScreen = useMediaQuery(theme.breakpoints.between("sm", "md"));
   const columns = [
-    { field: "id", headerName: "ID" },
+    !isSmallScreen && { field: "id", headerName: "ID" },
     {
       field: "name",
       headerName: "Name",
       flex: 1,
       cellClassName: "name-column--cell",
     },
-    {
-      field: "phone",
-      headerName: "Phone Number",
-      flex: 1,
-    },
-    {
-      field: "email",
-      headerName: "Email",
-      flex: 1,
-    },
+    !isSmallScreen &&
+      !isMediumScreen && {
+        field: "phone",
+        headerName: "Phone Number",
+        flex: 1,
+      },
+    !isSmallScreen &&
+      !isMediumScreen && {
+        field: "email",
+        headerName: "Email",
+        flex: 1,
+      },
     {
       field: "cost",
       headerName: "Cost",
@@ -35,15 +39,15 @@ const Invoices = () => {
         </Typography>
       ),
     },
-    {
+    !isSmallScreen && {
       field: "date",
       headerName: "Date",
       flex: 1,
     },
-  ];
+  ].filter(Boolean);
 
   return (
-    <Box m="20px">
+    <Box m={isSmallScreen? "20px 0 0 20px" : "20px 20px 0 20px"}>
       <Header title="Invoices" subtitle="List of Invoices Balance" />
       <Box
         m="15px 0 0 0"
