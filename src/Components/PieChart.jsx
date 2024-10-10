@@ -1,11 +1,12 @@
 import { ResponsivePie } from "@nivo/pie";
 import { tokens } from "../theme";
-import { useTheme } from "@mui/material";
+import { useTheme, useMediaQuery } from "@mui/material";
 import { mockPieData as data } from "../Data/Data";
 
 const PieChart = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <ResponsivePie
       data={data}
@@ -92,10 +93,10 @@ const PieChart = () => {
           anchor: "bottom",
           direction: "row",
           justify: false,
-          translateX: 0,
-          translateY: 56,
+          translateX: isSmallScreen? 25 : 0,
+          translateY: isSmallScreen? 20 : 60,
           itemsSpacing: 0,
-          itemWidth: 100,
+          itemWidth: isSmallScreen? 55 : 100,
           itemHeight: 18,
           itemTextColor: "#999",
           itemDirection: "left-to-right",

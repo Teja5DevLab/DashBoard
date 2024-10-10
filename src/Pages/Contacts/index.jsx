@@ -39,7 +39,10 @@ const Contacts = () => {
   ];
 
   return (
-    <Box m={isSmallScreen ? "20px 0 0 20px" : "20px 20px 0 20px"}>
+    <Box
+      width={isSmallScreen ? "19.2rem" : "auto"}
+      m={isSmallScreen ? "20px 0 0 20px" : "20px 20px 0 20px"}
+    >
       <Header title="CONTACT" subtitle="Contacts for Future Reference" />
       <Box
         m="15px 0 0 0"
@@ -47,6 +50,7 @@ const Contacts = () => {
         boxShadow={3}
         sx={{
           cursor: "pointer",
+          overflow: "auto",
           "& .MuiDataGrid-root": {
             border: "none",
             minWidth: "700px",
@@ -79,22 +83,20 @@ const Contacts = () => {
           },
         }}
       >
-        <Box sx={{ height: "100%", overflow: "auto" }}>
-          <DataGrid
-            checkboxSelection
-            rows={mockDataContacts}
-            columns={columns}
-            pagination
-            initialState={{
-              pagination: {
-                paginationModel: {
-                  pageSize: 7,
-                },
+        <DataGrid
+          checkboxSelection
+          rows={mockDataContacts}
+          columns={columns}
+          pagination
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 7,
               },
-            }}
-            pageSizeOptions={[7, 10, 20]}
-          />
-        </Box>
+            },
+          }}
+          pageSizeOptions={[7, 10, 20]}
+        />
       </Box>
     </Box>
   );

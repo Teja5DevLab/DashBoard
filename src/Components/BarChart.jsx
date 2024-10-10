@@ -113,10 +113,10 @@ const BarChart = ({ isDashboard = false }) => {
           translateX: 120,
           translateY: 0,
           itemsSpacing: 2,
-          itemWidth: 100,
+          itemWidth: 70,
           itemHeight: 20,
           itemDirection: "left-to-right",
-          itemOpacity: 0.85,
+          itemOpacity: 0.90,
           symbolSize: 20,
         },
       ]}

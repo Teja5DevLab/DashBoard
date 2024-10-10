@@ -71,7 +71,10 @@ const Team = () => {
   ];
 
   return (
-    <Box m={isSmallScreen ? "20px 0 0 20px" : "20px 20px 0 20px"}>
+    <Box
+      width={isSmallScreen ? "19.2rem" : "auto"}
+      m={isSmallScreen ? "20px 0 0 20px" : "20px 20px 0 20px"}
+    >
       <Header title="TEAM" subtitle="Managing the Team Members" />
       <Box
         m="15px 0 0 0"
@@ -79,6 +82,7 @@ const Team = () => {
         boxShadow={3}
         sx={{
           cursor: "pointer",
+          overflow: "auto",
           "& .MuiDataGrid-root": {
             border: "none",
             minWidth: "800px",
@@ -108,7 +112,6 @@ const Team = () => {
           },
         }}
       >
-        <Box sx={{ height: "100%", overflow: "auto" }}>
           <DataGrid
             checkboxSelection
             rows={mockDataTeam}
@@ -123,7 +126,6 @@ const Team = () => {
             }}
             pageSizeOptions={[7, 10, 20]}
           />
-        </Box>
       </Box>
     </Box>
   );
