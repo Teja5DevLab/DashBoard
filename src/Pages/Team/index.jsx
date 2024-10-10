@@ -81,7 +81,7 @@ const Team = () => {
           cursor: "pointer",
           "& .MuiDataGrid-root": {
             border: "none",
-            minWidth: "700px",
+            minWidth: "800px",
           },
           "& .MuiDataGrid-cell": {
             borderBottom: "none",
