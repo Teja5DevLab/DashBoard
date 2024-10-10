@@ -11,9 +11,8 @@ const Team = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const isMediumScreen = useMediaQuery(theme.breakpoints.between("sm", "md"));
   const columns = [
-    !isSmallScreen && { field: "id", headerName: "ID", flex: 0.5 },
+    { field: "id", headerName: "ID", flex: 0.5 },
     {
       field: "name",
       headerName: "Name",
@@ -26,21 +25,19 @@ const Team = () => {
       type: "number",
       headerAlign: "left",
       align: "left",
-      flex: 0.7,
+      flex: 0.5,
     },
-    !isSmallScreen &&
-      !isMediumScreen && {
-        field: "phone",
-        headerName: "Phone Number",
-        flex: 1,
-      },
-    !isSmallScreen &&
-      !isMediumScreen && {
-        field: "email",
-        headerName: "Email",
-        flex: 1,
-      },
-    !isSmallScreen && {
+    {
+      field: "phone",
+      headerName: "Phone Number",
+      flex: 1,
+    },
+    {
+      field: "email",
+      headerName: "Email",
+      flex: 1,
+    },
+    {
       field: "accessLevel",
       headerName: "Access Level",
       flex: 1,
@@ -71,10 +68,10 @@ const Team = () => {
         );
       },
     },
-  ].filter(Boolean);
+  ];
 
   return (
-    <Box m={isSmallScreen? "20px 0 0 20px" : "20px 20px 0 20px"}>
+    <Box m={isSmallScreen ? "20px 0 0 20px" : "20px 20px 0 20px"}>
       <Header title="TEAM" subtitle="Managing the Team Members" />
       <Box
         m="15px 0 0 0"
@@ -84,6 +81,7 @@ const Team = () => {
           cursor: "pointer",
           "& .MuiDataGrid-root": {
             border: "none",
+            minWidth: "700px",
           },
           "& .MuiDataGrid-cell": {
             borderBottom: "none",
@@ -110,20 +108,22 @@ const Team = () => {
           },
         }}
       >
-        <DataGrid
-          checkboxSelection
-          rows={mockDataTeam}
-          columns={columns}
-          pagination
-          initialState={{
-            pagination: {
-              paginationModel: {
-                pageSize: 7,
+        <Box sx={{ height: "100%", overflow: "auto" }}>
+          <DataGrid
+            checkboxSelection
+            rows={mockDataTeam}
+            columns={columns}
+            pagination
+            initialState={{
+              pagination: {
+                paginationModel: {
+                  pageSize: 7,
+                },
               },
-            },
-          }}
-          pageSizeOptions={[7, 10, 20]}
-        />
+            }}
+            pageSizeOptions={[7, 10, 20]}
+          />
+        </Box>
       </Box>
     </Box>
   );

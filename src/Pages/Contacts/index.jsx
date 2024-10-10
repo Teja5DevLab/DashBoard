@@ -8,9 +8,8 @@ const Contacts = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const isMediumScreen = useMediaQuery(theme.breakpoints.between("sm", "md"));
   const columns = [
-    !isSmallScreen && { field: "id", headerName: "ID", flex: 0.5 },
+    { field: "id", headerName: "ID", flex: 0.5 },
     {
       field: "name",
       headerName: "Name",
@@ -22,27 +21,25 @@ const Contacts = () => {
       headerName: "Email",
       flex: 1,
     },
-    !isSmallScreen && {
+    {
       field: "address",
       headerName: "Address",
       flex: 1,
     },
-    !isSmallScreen &&
-      !isMediumScreen && {
-        field: "city",
-        headerName: "City",
-        flex: 1,
-      },
-    !isSmallScreen &&
-      !isMediumScreen && {
-        field: "zipCode",
-        headerName: "Zip Code",
-        flex: 1,
-      },
-  ].filter(Boolean);
+    {
+      field: "city",
+      headerName: "City",
+      flex: 1,
+    },
+    {
+      field: "zipCode",
+      headerName: "Zip Code",
+      flex: 1,
+    },
+  ];
 
   return (
-    <Box m={isSmallScreen? "20px 0 0 20px" : "20px 20px 0 20px"}>
+    <Box m={isSmallScreen ? "20px 0 0 20px" : "20px 20px 0 20px"}>
       <Header title="CONTACT" subtitle="Contacts for Future Reference" />
       <Box
         m="15px 0 0 0"
@@ -52,6 +49,7 @@ const Contacts = () => {
           cursor: "pointer",
           "& .MuiDataGrid-root": {
             border: "none",
+            minWidth: "700px",
           },
           "& .MuiDataGrid-cell": {
             borderBottom: "none",
@@ -81,20 +79,22 @@ const Contacts = () => {
           },
         }}
       >
-        <DataGrid
-          checkboxSelection
-          rows={mockDataContacts}
-          columns={columns}
-          pagination
-          initialState={{
-            pagination: {
-              paginationModel: {
-                pageSize: 7,
+        <Box sx={{ height: "100%", overflow: "auto" }}>
+          <DataGrid
+            checkboxSelection
+            rows={mockDataContacts}
+            columns={columns}
+            pagination
+            initialState={{
+              pagination: {
+                paginationModel: {
+                  pageSize: 7,
+                },
               },
-            },
-          }}
-          pageSizeOptions={[7, 10, 20]}
-        />
+            }}
+            pageSizeOptions={[7, 10, 20]}
+          />
+        </Box>
       </Box>
     </Box>
   );

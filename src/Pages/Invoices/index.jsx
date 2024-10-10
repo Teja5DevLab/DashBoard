@@ -8,27 +8,24 @@ const Invoices = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const isMediumScreen = useMediaQuery(theme.breakpoints.between("sm", "md"));
   const columns = [
-    !isSmallScreen && { field: "id", headerName: "ID" },
+    { field: "id", headerName: "ID" },
     {
       field: "name",
       headerName: "Name",
       flex: 1,
       cellClassName: "name-column--cell",
     },
-    !isSmallScreen &&
-      !isMediumScreen && {
-        field: "phone",
-        headerName: "Phone Number",
-        flex: 1,
-      },
-    !isSmallScreen &&
-      !isMediumScreen && {
-        field: "email",
-        headerName: "Email",
-        flex: 1,
-      },
+    {
+      field: "phone",
+      headerName: "Phone Number",
+      flex: 1,
+    },
+    {
+      field: "email",
+      headerName: "Email",
+      flex: 1,
+    },
     {
       field: "cost",
       headerName: "Cost",
@@ -39,15 +36,15 @@ const Invoices = () => {
         </Typography>
       ),
     },
-    !isSmallScreen && {
+    {
       field: "date",
       headerName: "Date",
       flex: 1,
     },
-  ].filter(Boolean);
+  ];
 
   return (
-    <Box m={isSmallScreen? "20px 0 0 20px" : "20px 20px 0 20px"}>
+    <Box m={isSmallScreen ? "20px 0 0 20px" : "20px 20px 0 20px"}>
       <Header title="Invoices" subtitle="List of Invoices Balance" />
       <Box
         m="15px 0 0 0"
@@ -57,6 +54,7 @@ const Invoices = () => {
           cursor: "pointer",
           "& .MuiDataGrid-root": {
             border: "none",
+            minWidth: "700px",
           },
           "& .MuiDataGrid-cell": {
             borderBottom: "none",
@@ -83,20 +81,22 @@ const Invoices = () => {
           },
         }}
       >
-        <DataGrid
-          checkboxSelection
-          rows={mockDataInvoices}
-          columns={columns}
-          pagination
-          initialState={{
-            pagination: {
-              paginationModel: {
-                pageSize: 7,
+        <Box sx={{ height: "100%", overflow: "auto" }}>
+          <DataGrid
+            checkboxSelection
+            rows={mockDataInvoices}
+            columns={columns}
+            pagination
+            initialState={{
+              pagination: {
+                paginationModel: {
+                  pageSize: 7,
+                },
               },
-            },
-          }}
-          pageSizeOptions={[7, 10, 20]}
-        />
+            }}
+            pageSizeOptions={[7, 10, 20]}
+          />
+        </Box>
       </Box>
     </Box>
   );

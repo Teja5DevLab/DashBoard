@@ -58,7 +58,7 @@ const Sidebar = ({ onCollapse }) => {
   return (
     <Box
       position="fixed"
-      height="100lvh"
+      height="100%"
       boxShadow={3}
       sx={{
         "& .pro-sidebar-inner": {
