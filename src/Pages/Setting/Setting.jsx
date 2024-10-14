@@ -70,9 +70,13 @@ const Settings = () => {
             label="Phone Number"
             variant="outlined"
             fullWidth
+            sx={{ mb: 3 }}
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
           />
+          <Button variant="contained" color="secondary">
+            Submit Change
+          </Button>
         </Box>
       </Box>
       <Box
