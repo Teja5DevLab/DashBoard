@@ -14,6 +14,7 @@ import Bar from "./Pages/Bar";
 import Pie from "./Pages/Pie";
 import Line from "./Pages/Line";
 import Geography from "./Pages/Geo";
+import Setting from "./Pages/Setting/Setting.jsx";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -45,6 +46,7 @@ function App() {
               <Route path="/pie" element={<Pie />} />
               <Route path="/line" element={<Line />} />
               <Route path="/geography" element={<Geography />} />
+              <Route path="/setting" element={<Setting />} />
             </Routes>
           </main>
         </div>

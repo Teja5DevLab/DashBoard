@@ -1,5 +1,6 @@
 import { Box, IconButton, useTheme } from "@mui/material";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { ColorModeContext, tokens } from "../../theme.js";
 import InputBase from "@mui/material/InputBase";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
@@ -20,7 +21,7 @@ const Topbar = () => {
         display="flex"
         backgroundColor={colors.primary[400]}
         borderRadius="3px"
-        boxShadow={3}
+        boxShadow={1}
       >
         <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" />
         <IconButton type="button" sx={{ p: 1 }}>
@@ -35,15 +36,21 @@ const Topbar = () => {
             <LightModeOutlinedIcon />
           )}
         </IconButton>
+        <Link to="team">
         <IconButton>
           <NotificationsOutlinedIcon />
         </IconButton>
+        </Link>
+        <Link to="setting">
         <IconButton>
           <SettingsOutlinedIcon />
         </IconButton>
+        </Link>
+        <Link to="form">
         <IconButton>
           <PersonOutlinedIcon />
         </IconButton>
+        </Link>
       </Box>
     </Box>
   );

@@ -72,7 +72,7 @@ const Team = () => {
 
   return (
     <Box
-      width={isSmallScreen ? "19.2rem" : "auto"}
+      width={isSmallScreen ? "23.5rem" : "auto"}
       m={isSmallScreen ? "20px 0 0 20px" : "20px 20px 0 20px"}
     >
       <Header title="TEAM" subtitle="Managing the Team Members" />
